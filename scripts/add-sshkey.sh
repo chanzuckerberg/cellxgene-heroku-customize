@@ -1,7 +1,7 @@
 set -o errexit    # always exit on error
 set -o pipefail   # don't ignore exit codes when piping output
 set -o posix      # more strict failures in subshells
-set -x            # debugging
+# set -x            # debugging
 
 env_dir=${1:-}
 ssh_key_file=${env_dir}/CUSTOMIZE_GIT_SSH_KEY
