@@ -1,3 +1,7 @@
+set -o errexit    # always exit on error
+set -o pipefail   # don't ignore exit codes when piping output
+set -o posix      # more strict failures in subshells
+
 env_dir=${1:-}
 ssh_key_file=${env_dir}/CUSTOMIZE_GIT_SSH_KEY
 GIT_SSH_KEY=$(cat ${ssh_key_file})
@@ -13,7 +17,7 @@ if [ "$GIT_SSH_KEY" != "" ]; then
       fi
 
       # Load the private key into a file.
-      echo $GIT_SSH_KEY | base64 --decode > ~/.ssh/deploy_key
+      cat ${ssh_key_file} | base64 --decode > ~/.ssh/deploy_key
 
       # Change the permissions on the file to
       # be read-only for this user.
