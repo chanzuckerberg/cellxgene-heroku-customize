@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+echo in comile script
+####### Configure environment
+
+set -o errexit    # always exit on error
+set -o pipefail   # don't ignore exit codes when piping output
+set -o posix      # more strict failures in subshells
+#set -x          # enable debugging
+
+# Configure directories
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+
+echo build user is `whoami`
+ls -lrta ~
+
+# to export environment if we need to
+export_env_dir() {
+  env_dir=$1
+  whitelist_regex=${2:-'^(CUSTOMIZE_GIT_REPO|CUSTOMIZE_DIR)$'}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  if [ -d "$ENV_DIR" ]; then
+    for e in $(ls $ENV_DIR); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $ENV_DIR/$e)"
+      :
+    done
+  fi
+}
+
+# export envs
+export_env_dir
+
+# first we need to set up ssh
+sh scripts/add-sshkey.sh $ENV_DIR
+
+# clone customize repo
+git clone ${CUSTOMIZE_GIT_REPO} customize_clone
+
+cp -r customize_clone/${CUSTOMIZE_DIR}/customize/* ${BUILD_DIR}/server/eb
+# TODO(el): worry about env stuff later
+cp -r customize_clone/${CUSTOMIZE_DIR}/customize-dev/* ${BUILD_DIR}/server/eb

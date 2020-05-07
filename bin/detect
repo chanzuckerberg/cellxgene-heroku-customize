@@ -1,0 +1,4 @@
+#!/bin/sh
+# always run this
+# TODO(el): figure this out
+exit 0
