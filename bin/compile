@@ -33,7 +33,7 @@ export_env_dir() {
 export_env_dir
 
 # first we need to set up ssh
-sh scripts/add-sshkey.sh $ENV_DIR
+bash scripts/add-sshkey.sh $ENV_DIR
 
 # clone customize repo
 git clone ${CUSTOMIZE_GIT_REPO} customize_clone
