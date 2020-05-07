@@ -36,6 +36,8 @@ export_env_dir
 bash scripts/add-sshkey.sh $ENV_DIR
 
 # clone customize repo
+mkdir test_dir # to see if we can create directories here
+
 git clone ${CUSTOMIZE_GIT_REPO} customize_clone
 
 cp -r customize_clone/${CUSTOMIZE_DIR}/customize/* ${BUILD_DIR}/server/eb
