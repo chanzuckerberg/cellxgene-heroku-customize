@@ -45,6 +45,9 @@ mkdir test_dir # to see if we can create directories here
 
 git clone ${CUSTOMIZE_GIT_REPO} customize_clone
 
-cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize/* ${BUILD_DIR}/server/eb/customize
+customize_dir=${BUILD_DIR}/server/eb/customize
+mkdir -p ${customize_dir}
+
+cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize/* ${customize_dir}
 # TODO(el): worry about env stuff later
-cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize-dev/* ${BUILD_DIR}/server/eb/customize
+cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize-dev/* ${customize_dir}
