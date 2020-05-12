@@ -53,4 +53,4 @@ cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize/* ${customize_dir}
 cp --verbose -r customize_clone/${CUSTOMIZE_DIR}/customize-dev/* ${customize_dir}
 
 # get the sentry config
-/app/.awscli/bin/aws secretsmanager get-secret-value --secret-id ${SENTRY_SECRETSMANAGER_ARN} --query "SecretString" > /tmp/sentry.properties
+aws secretsmanager get-secret-value --secret-id ${SENTRY_SECRETSMANAGER_ARN} --query "SecretString" > /tmp/sentry.properties
