@@ -23,7 +23,7 @@ fi
 # to export environment if we need to
 export_env_dir() {
   env_dir=$1
-  whitelist_regex=${2:-'^(CUSTOMIZE_GIT_REPO|CUSTOMIZE_DIR|SENTRY_SECRETSMANAGER_ARN|AWS_DEFAULT_REGION|AWS_REGION)$'}
+  whitelist_regex=${2:-'^(CUSTOMIZE_GIT_REPO|CUSTOMIZE_DIR|SENTRY_SECRETSMANAGER_ARN|AWS_.*)$'}
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
   if [ -d "$ENV_DIR" ]; then
     for e in $(ls $ENV_DIR); do
