@@ -44,6 +44,7 @@ bash scripts/add-sshkey.sh $ENV_DIR
 mkdir test_dir # to see if we can create directories here
 
 git clone ${CUSTOMIZE_GIT_REPO} customize_clone
+(cd customize_clone && git checkout dunitz/heroku)
 
 customize_dir=${BUILD_DIR}/server/eb/customize
 mkdir -p ${customize_dir}
